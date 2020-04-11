@@ -2,13 +2,12 @@ package com.csvtojavaobjects;
 
 import POJO.CSVUser;
 import com.opencsv.bean.CsvToBean;
-        import com.opencsv.bean.CsvToBeanBuilder;
-        import java.io.IOException;
-        import java.io.Reader;
-        import java.nio.file.Files;
-        import java.nio.file.Paths;
-        import java.util.Iterator;
-        import java.util.List;
+import com.opencsv.bean.CsvToBeanBuilder;
+import java.io.IOException;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 
 public class OpenCSVReadAndParseToBean {
     private static final String SAMPLE_CSV_FILE_PATH = "C:/Users/DELL/Documents/Pri/Task/Java/OpenCSV/csvFile.csv";
@@ -22,10 +21,10 @@ public class OpenCSVReadAndParseToBean {
                     .withIgnoreLeadingWhiteSpace(true)
                     .build();
 
-            Iterator<CSVUser> csvUserIterator = csvToBean.iterator();
+            // Reads all CSV contents into memory (Not suitable for large CSV files)
+            List<CSVUser> csvUsers = csvToBean.parse();
 
-            while (csvUserIterator.hasNext()) {
-                CSVUser csvUser = csvUserIterator.next();
+            for(CSVUser csvUser: csvUsers) {
                 System.out.println("Name : " + csvUser.getName());
                 System.out.println("Email : " + csvUser.getEmail());
                 System.out.println("PhoneNo : " + csvUser.getPhoneNo());
